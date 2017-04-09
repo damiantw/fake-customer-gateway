@@ -7,13 +7,22 @@ damian@troyweb.com
 
 ## Install
 
-You will need to have [Composer](https://getcomposer.org/doc/00-intro.md) installed.
+You will need to have [Composer](https://getcomposer.org/doc/00-intro.md) and PHP v7.0 or greater installed.
 
-Run the following command in the root directory of your project to initialize Composer.
+Run the following command in the root directory of your project and complete all of the prompts to initialize Composer.
 
 `composer init`
 
-Complete all of the prompts then run the following command to add this package to the dependency list of your project.
+**or** manually create a file called package.json in your project root and paste in the following:
+
+```json
+{
+    "name": "albany-can-code/php-challenge-problem",
+    "require": {}
+}
+```
+
+Run the following command to add this package to the dependency list of your project.
 
 `composer require damiantw/fake-customer-gateway`
 
@@ -164,7 +173,6 @@ $customerGateway->saveDataFile($pathToFile);
  */
 $customerGateway->loadDataFileIfExists($pathToFile);
 ```
-
 
 ### Sample Data
 
