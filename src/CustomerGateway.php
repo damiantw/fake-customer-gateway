@@ -22,7 +22,7 @@ class CustomerGateway
         return $this->customers->values()->all();
     }
 
-    public function paginate(int $pageNumber, int $perPage = 10)
+    public function paginate($pageNumber, $perPage = 10)
     {
         return $this->customers->forPage($pageNumber, $perPage);
     }
@@ -37,20 +37,24 @@ class CustomerGateway
         return $this->customers->sortByDesc($field)->values()->all();
     }
 
-    public function sortByPaginatedAsc($field, $pageNumber, $perPage)
+    public function sortByPaginatedAsc($field, $pageNumber, $perPage = 10)
     {
         return $this->customers->sortBy($field)->forPage($pageNumber, $perPage)->values()->all();
     }
 
-    public function sortByPaginatedDesc($field, $pageNumber, $perPage)
+    public function sortByPaginatedDesc($field, $pageNumber, $perPage = 10)
     {
         return $this->customers->sortByDesc($field)->forPage($pageNumber, $perPage)->values()->all();
     }
 
-
-    public function get(int $id)
+    public function count()
     {
-        return $this->customers->get($id, function () use (&$id) {
+        return $this->customers->count();
+    }
+
+    public function get($id)
+    {
+        return $this->customers->get((int) $id, function () use (&$id) {
             throw new CustomerNotFoundException("No customer found with id: $id");
         });
     }
@@ -67,33 +71,33 @@ class CustomerGateway
 
         $id = $this->customers->max('id') + 1;
 
-        $this->customers->put($id, new Customer($id, $name, $company, $email, $phone_number));
+        $this->customers->put((int) $id, new Customer($id, $name, $company, $email, $phone_number));
 
         return $id;
     }
 
-    public function update(int $id, $name = null, $company = null, $email = null, $phone_number = null)
+    public function update($id, $name = null, $company = null, $email = null, $phone_number = null)
     {
         if (!$this->isAllStringsOrNull(array_slice(func_get_args(), 1))) {
             throw new \InvalidArgumentException('Customer data fields must be a string or null.');
         }
 
-        if(!$this->customers->has($id)) {
+        if(!$this->customers->has((int) $id)) {
             throw new CustomerNotFoundException("No customer found with id: $id");
         }
 
-        $this->customers->put($id, new Customer($id, $name, $company, $email, $phone_number));
+        $this->customers->put((int) $id, new Customer($id, $name, $company, $email, $phone_number));
 
         return true;
     }
 
-    public function delete(int $id)
+    public function delete($id)
     {
-        if(!$this->customers->has($id)) {
+        if(!$this->customers->has((int) $id)) {
             throw new CustomerNotFoundException("No customer found with id: $id");
         }
 
-        $this->customers->forget($id);
+        $this->customers->forget((int) $id);
 
         return true;
     }

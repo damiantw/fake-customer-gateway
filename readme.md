@@ -85,6 +85,9 @@ $customerGateway->sortByPaginatedAsc($field, $pageNumber, $perPage);
 //$field can be any of the following strings: 'id', 'name', 'company', 'email', 'phone_number'
 $customerGateway->sortByPaginatedDesc($field, $pageNumber, $perPage);
 
+//Returns the number of customer records
+$customerGateway->count();
+
 //Returns the customer with the given id. Throws an exception if no user with that id is found.
 $customerGateway->get($id);
 
