@@ -24,7 +24,7 @@ class CustomerGateway
 
     public function paginate($pageNumber, $perPage = 10)
     {
-        return $this->customers->forPage($pageNumber, $perPage);
+        return $this->customers->forPage((int) $pageNumber, (int) $perPage);
     }
 
     public function sortByAsc($field)
@@ -39,12 +39,12 @@ class CustomerGateway
 
     public function sortByPaginatedAsc($field, $pageNumber, $perPage = 10)
     {
-        return $this->customers->sortBy($field)->forPage($pageNumber, $perPage)->values()->all();
+        return $this->customers->sortBy($field)->forPage((int) $pageNumber, (int) $perPage)->values()->all();
     }
 
     public function sortByPaginatedDesc($field, $pageNumber, $perPage = 10)
     {
-        return $this->customers->sortByDesc($field)->forPage($pageNumber, $perPage)->values()->all();
+        return $this->customers->sortByDesc($field)->forPage((int) $pageNumber, (int) $perPage)->values()->all();
     }
 
     public function count()
