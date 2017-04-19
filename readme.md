@@ -9,7 +9,7 @@ damian@troyweb.com
 
 You will need to have [Composer](https://getcomposer.org/doc/00-intro.md) and PHP v7.0 or greater installed.
 
-Create a file called package.json in your project root and paste in the following:
+Create a file called composer.json in your project root and paste in the following:
 
 ```json
 {
